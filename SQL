@@ -1,0 +1,25 @@
+SELECT "Planners"."Description", "Stock_Trans_Log"."Trans_Date", "Stock_Trans_Types"."Description", "Part"."Part_No", "Stock_Trans_Log"."Qty_Change", "Part"."Part_Prim_Desc", "Stock_Trans_Log"."Supplier_Customer", "Customer"."Customer_Name", "Stock_Trans_Log"."SO_No"
+
+FROM   ((("Manu211_Live"."stock"."Stock_Trans_Log" "Stock_Trans_Log" 
+
+INNER JOIN "Manu211_Live"."production"."Part" "Part" ON "Stock_Trans_Log"."Part_No"="Part"."Part_No") 
+
+INNER JOIN "Manu211_Live"."stock"."Stock_Trans_Types" "Stock_Trans_Types" ON "Stock_Trans_Log"."Tran_Type"="Stock_Trans_Types"."Type") 
+
+LEFT OUTER JOIN "Manu211_Live"."sales"."Customer" "Customer" ON "Stock_Trans_Log"."Supplier_Customer"="Customer"."Customer_No") 
+
+INNER JOIN "Manu211_Live"."production"."Planners" "Planners" ON "Part"."Planner"="Planners"."Planner"
+
+WHERE   NOT ("Part"."Part_No" LIKE N'%5A-6729-069' OR "Part"."Part_No" LIKE N'%MP-1028-017' 
+
+OR "Part"."Part_No" LIKE N'%MP-1028-018' OR "Part"."Part_No" LIKE N'%MP-1028-019' 
+
+OR "Part"."Part_No" LIKE N'%WP-6792-061' OR "Part"."Part_No" LIKE N'%WP-6792-069' 
+
+OR "Part"."Part_No" LIKE N'%WP-6792-075' OR "Part"."Part_No" LIKE N'%XXX' 
+
+OR "Part"."Part_No" LIKE N'%XXX/I') AND "Planners"."Description"=N'WATER PUMPS' AND ("Stock_Trans_Types"."Description"=N'Return of sales issue' 
+
+OR "Stock_Trans_Types"."Description"=N'Sales issue')
+
+ORDER BY "Stock_Trans_Log"."Trans_Date" DESC
