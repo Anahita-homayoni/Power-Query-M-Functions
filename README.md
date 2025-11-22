@@ -26,8 +26,8 @@ in
 fn-RemoveDiacritics.m
 let fn_RemoveDiacritics = (input as text) =>
 let
-    Charset = "áàãâäéèêëíìîïóòôõöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ",
-    Replace = "aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC",
+    Charset = "apple",
+    Replace = "orange",
     Result = Text.Translate(input, Charset, Replace)
 in
     Result
